@@ -1,0 +1,42 @@
+app:
+  env: ${APP_ENV}
+  port: 8080
+
+database:
+  host: ${DB_HOST}
+  port: ${DB_PORT}
+  name: ${DB_NAME}
+  user: ${DB_USER}
+  password: ${DB_PASSWORD}
+  sslmode: disable
+
+analytics:
+  enabled: ${ENABLE_ANALYTICS}
+
+clickhouse:
+  host: ${CLICKHOUSE_HOST}
+  port: ${CLICKHOUSE_PORT}
+  database: ${CLICKHOUSE_DB}
+  username: ${CLICKHOUSE_USER}
+  password: ${CLICKHOUSE_PASSWORD}
+
+telegram:
+  token: ${TELEGRAM_BOT_TOKEN}
+  webhook_domain: ${DOMAIN}
+
+jwt:
+  secret: ${JWT_SECRET}
+
+container:
+  timeout_seconds: 60
+  memory_limit_mb: 1024
+  cpu_limit: 1.0
+  base_image: "golang:1.25.3-alpine"
+
+logging:
+  level: "info"
+  format: "json"
+
+cors:
+  allowed_origins: ["https://${DOMAIN}"]
+  allowed_methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]

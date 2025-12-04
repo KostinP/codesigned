@@ -1,0 +1,1 @@
+-- В Postgres используется CREATE DATABASE в отдельном подключении

@@ -1,0 +1,10 @@
+# .air.toml
+root = "."
+tmp_dir = "tmp"
+[build]
+  cmd = "go build -o ./tmp/main ./cmd"
+  bin = "tmp/main"
+  full_bin = ""
+  exclude_dir = ["migrations", "docs"]
+[log]
+  time = true

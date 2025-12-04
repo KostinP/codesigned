@@ -1,0 +1,396 @@
+basePath: /api
+definitions:
+  entity.UserSession:
+    properties:
+      city:
+        example: Moscow
+        type: string
+      country:
+        example: Russia
+        type: string
+      created_at:
+        example: "2025-07-24T18:25:43.511Z"
+        type: string
+      expires_at:
+        example: "2025-08-24T18:25:43.511Z"
+        type: string
+      id:
+        example: 123e4567-e89b-12d3-a456-426614174000
+        type: string
+      ip_address:
+        example: 192.168.1.1
+        type: string
+      last_active_at:
+        example: "2025-07-25T10:15:00.000Z"
+        type: string
+      token:
+        example: jwt.token.here
+        type: string
+      user_agent:
+        example: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+        type: string
+      user_id:
+        example: 123e4567-e89b-12d3-a456-426614174001
+        type: string
+    type: object
+  transport.AnalyticsResponse:
+    properties:
+      data: {}
+      total:
+        type: integer
+    type: object
+  transport.LogEventRequest:
+    properties:
+      event_data:
+        additionalProperties: true
+        type: object
+      event_type:
+        type: string
+      visitor_id:
+        type: string
+    required:
+    - event_type
+    type: object
+  transport.SetInactivityTimeoutRequest:
+    description: Таймаут в секундах.
+    properties:
+      timeout_seconds:
+        description: Таймаут в секундах
+        example: 3600
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@edu-platform.com
+    name: Support Team
+  description: Backend for Edu Platform with gamification
+  license:
+    name: MIT
+  termsOfService: https://edu-platform.com/terms
+  title: Edu Platform API
+  version: "1.0"
+paths:
+  /api/analytics/conversion-rate:
+    get:
+      parameters:
+      - description: Тип события (form_submit, button_click, etc.)
+        in: query
+        name: event_type
+        required: true
+        type: string
+      - default: 30
+        description: Количество дней (по умолчанию 30)
+        in: query
+        name: days
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              format: float64
+              type: number
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Получить конверсию по событию
+      tags:
+      - Analytics
+  /api/analytics/page-views:
+    get:
+      parameters:
+      - default: 30
+        description: Количество дней (по умолчанию 30)
+        in: query
+        name: days
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/transport.AnalyticsResponse'
+      security:
+      - BearerAuth: []
+      summary: Получить статистику просмотров страниц
+      tags:
+      - Analytics
+  /api/analytics/utm-stats:
+    get:
+      parameters:
+      - default: 30
+        description: Количество дней (по умолчанию 30)
+        in: query
+        name: days
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/transport.AnalyticsResponse'
+      security:
+      - BearerAuth: []
+      summary: Получить UTM статистику
+      tags:
+      - Analytics
+  /me/inactivity-timeout:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              format: int64
+              type: integer
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Получить таймаут неактивности
+      tags:
+      - Session
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Таймаут в секундах
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/transport.SetInactivityTimeoutRequest'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Установить таймаут неактивности
+      tags:
+      - Session
+  /me/sessions:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.UserSession'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Получить список сессий пользователя
+      tags:
+      - Session
+  /me/sessions/{id}:
+    delete:
+      parameters:
+      - description: ID сессии
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Удалить сессию по ID
+      tags:
+      - Session
+  /telegram/auth:
+    post:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Авторизация через Telegram
+      tags:
+      - Telegram
+  /users/{user_id}/link-visitor:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Привязка visitor_id к user
+      tags:
+      - Users
+  /visitor:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Получить visitor_id
+      tags:
+      - Visitors
+  /visitor/events:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Событие
+        in: body
+        name: event
+        required: true
+        schema:
+          $ref: '#/definitions/transport.LogEventRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Логировать событие посетителя
+      tags:
+      - Visitors
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
