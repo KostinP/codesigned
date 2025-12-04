@@ -1,0 +1,102 @@
+%%% Поля страницы %%%
+%\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=1.5cm}
+\geometry{left=30mm}
+\geometry{right=15mm}
+\geometry{top=20mm}
+\geometry{bottom=20mm}
+\newcounter{newpage} %% Счётчик для подсчёта страниц
+%\setcounter{newpage}{0} %% Сброс счётчика
+\pagestyle{plain}  %% Стиль страницы %% headings --- стиль страниц с номером и названием раздела в верхнем колонтитуле
+%% plain --- только номер страницы
+
+%%% Стили нумерации глав, разделов и т.д. %%%
+\def\thesection{}
+\def\thesubsection{\S\,\,\arabic{section}.\arabic{subsection}.\,}
+\def\thesubsubsection{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.\,}
+\def\theequation{\arabic{section}.\arabic{equation}}
+
+%%% Стили текста %%%
+\setlength{\parindent}{1cm}   % Отступ красной строки
+\mathsurround=2pt %% Отступ математических формул от текста
+%
+%\onehalfspacing % Полуторный интервал для всего текста
+% или \singlespacing % Одинарный интервал для всего текста
+% или \doublespacing % Двойной интервал для всего текста
+% или \setstretch{значение} % Произвольный интервал
+
+% В рамках
+%\begin{onehalfspace}
+% Текст внутри с полуторным интервалом
+%\end{onehalfspace}
+%\begin{doublespace}
+% Текст внутри с двойным интервалом
+%\end{doublespace}
+
+% Для всего
+\linespread{1.3} % 1,5 интервал
+
+\righthyphenmin=3 %% Минимальное количество символов для переноса в конце строки
+\emergencystretch=25pt %% Допустимое растяжение строки
+\setlength{\skip\footins}{12pt plus 4pt minus 4pt} %% Отступ перед нижними колонтитулами
+%-------------------------------------------------------------------------------------------------------------------
+%%% Форматирование и перенос %%%
+\sloppy
+\clubpenalty=10000
+\widowpenalty=10000
+%-------------------------------------------------------------------------------------------------------------------
+%%% Работа с шрифтами %%%
+\renewcommand{\rmdefault}{ftm} % Шрифт Times New Roman
+%-------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------
+%%% Стили таблиц %%%
+\setcounter{LTchunksize}{10} % Количество строк таблицы для обработки longtable'ом
+%>>>>>>>>>>>>>>>Ограничение на число 4 стр!!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+\setlength{\LTcapwidth}{\textwidth}  % Ширина подписи таблицы по ширине текста
+%-------------------------------------------------------------------------------------------------------------------
+%%% Графика %%%
+\graphicspath{{images/}} %% Путь для поиска графики
+%\renewcommand{\figurename}{Рисунок} %% Замена Fig. на Рис.
+\DeclareCaptionLabelSeparator{dot}{. }
+\captionsetup{justification=centering,labelsep=dot}
+%\renewcommand{\captionlabeldelim}{-} %% Замена разделителя подписи, напр.: на тире
+%-------------------------------------------------------------------------------------------------------------------
+%%% Колонтитулы %%%
+\makeatletter
+\renewcommand{\@oddhead}{\hfill --- \thepage ~--- \hfill}
+\renewcommand{\@oddfoot}{}
+\makeatother
+%\renewcommand{\thefootnote}{\alph{footnote}} % Буквенные сноски
+\renewcommand{\thefootnote}{\arabic{footnote}} % Сброс сносок на числовые
+%-------------------------------------------------------------------------------------------------------------------
+%%% Библиография %%%
+\makeatletter
+\bibliographystyle{gost705_good} % Стиль библиографии в соответствии с ГОСТ
+%\bibliographystyle{gost2003s_test} % Тестовый стиль библиографии в соответствии с ГОСТ
+%  gost71uv  не для этого ГОСТа!! 
+\renewcommand{\@biblabel}[1]{#1.\hfil}
+%\bibliographystyle{unsrt} % Сортировка в порядке цитирования
+\makeatother
+%-------------------------------------------------------------------------------------------------------------------
+%>>>>>>>>>>>>>>Этот фрагмент кода не для этого документа, а для примера настройки<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+%\usepackage{geometry}
+%\usetikzlibrary{arrows}
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+%\renewcommand{\chaptername}{Part}
+%\begin{document}
+%   \tikzset{font=\small}
+%   \tikzset{>=latex}
+%   \tikzset{align=flush center}
+%   \ctikzset{bipoles/length=1cm}
+%   \input{./title.tex} \newpage
+%    \tableofcontents
+%    \newpage   
+%    BLADIBLADIBLA
+%    \newpage
+%    \newgeometry{margin=0.01cm}  %<<<<<<<<<<<<<<<<<<<<<<<<<
+%    bladibladibla
+%   \newpage
+%    \restoregeometry  %<<<<<<<<<<<<<<<<<<<<<
+%    BLADIBLADIBLA
+%\end{document}
+%<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%-------------------------------------------------------------------------------------------------------------------

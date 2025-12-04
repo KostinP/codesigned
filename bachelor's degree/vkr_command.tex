@@ -1,0 +1,61 @@
+% Убраны проблемные переопределения команд
+%\renewcommand{\tg}{\mathop{\mathrm{tg}}\nolimits}%переопределение тангенса
+%\renewcommand{\arctg}{\mathop{\mathrm{arctg}}\nolimits}%переопределение арктангенса
+
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+\def\ed{\end{document}}
+\def\ul{\underline}
+
+\newcommand{\bohr}{a\ensuremath{_0}\ }
+\newcommand{\bohrn}{a\ensuremath{_0}}
+\newcommand{\cm}{cm$^{-1}\ $}
+\newcommand{\cmn}{cm$^{-1}$}
+
+\newcommand{\V}{\mathbf{V}} 
+\newcommand{\mV}{\mathcal{V}}
+
+\newcommand{\SqAngstrem}{\AA~\hspace{-2mm}$^2$} %площадь в ангстремах квадратных.
+\newcommand{\SqAngstremSmall}{\AA~\hspace{-2mm}\small$^2$}%площадь в ангстремах квадратных.
+
+\newcommand{\nodata}{---}
+
+\newcommand{\tr}{\hat{T}_r}
+\newcommand{\thetaphi}{\theta,\,\varphi}
+\newcommand{\SphericalFunc}{Y_{JM_J}(\thetaphi)}
+\newcommand{\tR}{\hat{T}_R}
+\newcommand{\tRk}{\hat{T}_{R_k}}
+\newcommand{\BO}{\varphi(\mathbf{r},\mathbf{R}) \chi(\mathbf{R})}
+\newcommand{\rr}{\mathbf{r},\mathbf{R}}
+\newcommand{\mZ}{\mathcal{Z}}
+\newcommand{\mW}{\mathcal{W}}
+\newcommand{\vnra}{\vec{\nabla}_{\vec{R}_{\alpha}}}
+\newcommand{\vntwora}{\vec{\nabla}^2_{\vec{R}_{\alpha}}}
+
+%___________________________________________________________________________________
+\regtotcounter{page}
+\newtotcounter{figurecnt}
+\newtotcounter{tablecnt}
+%                                                       подсчет количества рисунков
+\newtotcounter{totnumfigures}
+\makeatletter
+\renewenvironment{figure}[1][\fps@figure]{
+  \edef\@tempa{\noexpand\@float{figure}[#1]}
+  \@tempa
+  \addtocounter{totnumfigures}{1}
+}{
+  \end@float
+}
+\makeatother
+\newtotcounter{totnumtable}
+\makeatletter
+\renewenvironment{table}[1][\fps@table]{
+  \edef\@tempa{\noexpand\@float{table}[#1]}
+  \@tempa
+  \addtocounter{totnumtable}{1}
+}{
+  \end@float
+}
+\makeatother
+
+%_________________________________________________________________
