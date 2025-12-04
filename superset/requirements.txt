@@ -1,0 +1,8 @@
+# Создайте директорию superset если её нет
+mkdir -p superset
+
+# Создайте requirements.txt
+cat > superset/requirements.txt << 'EOF'
+clickhouse-connect==0.6.0
+clickhouse-sqlalchemy==0.2.0
+EOF

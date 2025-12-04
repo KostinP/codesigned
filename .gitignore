@@ -1,8 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
+*/node_modules
+*/.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -11,14 +11,14 @@
 !.yarn/versions
 
 # testing
-/coverage
+*/coverage
 
 # next.js
-/.next/
-/out/
+*/.next/
+*/out/
 
 # production
-/build
+*/build
 
 # misc
 .DS_Store
@@ -40,4 +40,126 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/output/*
+*/output/*
+
+
+
+
+
+# If you prefer the allow list template instead of the deny list, see community template:
+# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
+#
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Code coverage profiles and other test artifacts
+*.out
+coverage.*
+*.coverprofile
+profile.cov
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Go workspace file
+go.work
+go.work.sum
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# env file
+.env
+.env\ *
+.env.prod
+.env.stage
+.env.dev
+
+# Build artifacts
+*/bin/
+*/dist/
+coverage.out
+coverage.html
+
+# Logs
+*.log
+*/logs/
+
+# Temporary files
+tmp/
+*.tmp
+
+# Docker
+.docker/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# certificate
+*.crt
+*.key
+*.pem
+
+*.pdf
+
+# LaTeX временные файлы
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+
+# Промежуточные файлы
+*.dvi
+*.ps
+
+# Библиография
+*.bcf
+*.run.xml
+
+# Glossaries
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+
+# Listings
+*.lol
+
+# latexmk
+*.auxlock
+*.fdb_latexmk
+
+# Временные файлы редакторов
+*~
+*.backup
+*.swp
+*.swo
+
+# Папки сборки
+*/build/
+*/out/
+
+# Файлы для нейросети
+*/output/*
