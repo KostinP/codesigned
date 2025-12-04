@@ -23,8 +23,8 @@ DB_NAME_STRIP := $(strip $(DB_NAME))
 DB_PORT_STRIP := $(strip $(DB_PORT))
 
 DB_URL?=postgres://$(DB_USER_STRIP):$(DB_PASSWORD_STRIP)@$(DB_HOST_STRIP):$(DB_PORT_STRIP)/$(DB_NAME_STRIP)?sslmode=disable
-SWAGGER_DIRS?=./cmd,./internal/user/transport/http,./internal/user/entity
-MIGRATIONS_DIR?=./migrations/postgres  # Обновлено
+SWAGGER_DIRS?=./backend/cmd,./backend/internal/user/transport/http,./backend/internal/user/entity
+MIGRATIONS_DIR?=./backend/migrations/postgres
 
 GREEN := $(shell tput -Txterm setaf 2)
 YELLOW := $(shell tput -Txterm setaf 3)
@@ -62,7 +62,7 @@ endef
 
 init-env: ## Initialize environment files
 	@echo "$(BLUE)Initializing environment files...$(NC)"
-	@mkdir -p migrations/postgres migrations/clickhouse
+	@mkdir -p backend/migrations/postgres backend/migrations/clickhouse
 	@if [ ! -f .env.dev ]; then \
 		cp .env.example .env.dev 2>/dev/null || touch .env.dev; \
 		echo "$(GREEN)Created .env.dev$(NC)"; \
@@ -113,22 +113,22 @@ check-env: ## Check required env variables
 # =====================================================================
 
 run: ## Run server with Air (usage: make run env=dev)
-	$(call load_env,$(env),air)
+	$(call load_env,$(env),cd backend && air)
 
 test: ## Run tests (usage: make test env=dev)
-	$(call load_env,$(env),go test ./... -v)
+	$(call load_env,$(env),cd backend && go test ./... -v)
 
 build: ## Build app (usage: make build env=dev)
-	$(call load_env,$(env),go build -o bin/edu-platform ./cmd)
+	$(call load_env,$(env),cd backend && go build -o bin/edu-platform ./cmd)
 
 tidy: ## Tidy Go modules
-	go mod tidy
+	cd backend && go mod tidy
 
 swagger: ## Generate Swagger docs
-	swag init --dir $(SWAGGER_DIRS) --output ./docs
+	cd backend && swag init --dir $(SWAGGER_DIRS) --output ./docs
 
 wire: ## Generate wire dependencies
-	wire ./cmd
+	cd backend && wire ./cmd
 
 migrate-up: ## Apply DB migrations (usage: make migrate-up env=dev)
 	$(call load_env,$(env),migrate -path $(MIGRATIONS_DIR) -database "$(DB_URL)" up)

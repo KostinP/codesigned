@@ -125,7 +125,7 @@ upload_env_files() {
     log "Uploading environment files..."
     
     # Создаем директорию configs если её нет
-    ssh_vps "mkdir -p $PROJECT_DIR/configs"
+    ssh_vps "mkdir -p $PROJECT_DIR/backend/configs"
     
     # Копируем .env.prod для docker-compose
     scp_to_vps ".env.prod" "$PROJECT_DIR/.env.prod"
@@ -134,10 +134,10 @@ upload_env_files() {
     scp_to_vps ".env.prod" "$PROJECT_DIR/.env"
     
     # Копируем конфигурационные файлы
-    scp_to_vps "configs/prod.yaml" "$PROJECT_DIR/configs/prod.yaml"
+    scp_to_vps "backend/configs/prod.yaml" "$PROJECT_DIR/backend/configs/prod.yaml"
     
     # Проверяем что файлы загружены
-    ssh_vps "cd $PROJECT_DIR && ls -la .env* && ls -la configs/"
+    ssh_vps "cd $PROJECT_DIR && ls -la .env* && ls -la backend/configs/"
 }
 
 deploy_services() {
@@ -176,8 +176,8 @@ check_environment_files() {
         error "File .env.prod not found in current directory"
     fi
     
-    if [ ! -f "configs/prod.yaml" ]; then
-        error "File configs/prod.yaml not found"
+    if [ ! -f "backend/configs/prod.yaml" ]; then
+        error "File backend/configs/prod.yaml not found"
     fi
     
     success "Environment files verified"

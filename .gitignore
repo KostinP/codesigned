@@ -162,4 +162,4 @@ Thumbs.db
 */out/
 
 # Файлы для нейросети
-*/output/*
+/output/*

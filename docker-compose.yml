@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    build: .
+    build: ./backend
     ports:
       - "8080:8080"
     env_file:
@@ -10,7 +10,7 @@ services:
     environment:
       - ENABLE_ANALYTICS=${ENABLE_ANALYTICS:-true}
     volumes:
-      - ./configs:/app/configs:ro
+      - ./backend/configs:/app/configs:ro
     depends_on:
       postgres:
         condition: service_healthy
@@ -38,7 +38,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./migrations/postgres:/docker-entrypoint-initdb.d:ro
+      - ./backend/migrations/postgres:/docker-entrypoint-initdb.d:ro
     networks:
       - edu-platform
     restart: unless-stopped
@@ -63,7 +63,7 @@ services:
       - "9000:9000"
     volumes:
       - clickhouse_data:/var/lib/clickhouse
-      - ./migrations/clickhouse:/docker-entrypoint-initdb.d:ro
+      - ./backend/migrations/clickhouse:/docker-entrypoint-initdb.d:ro
     networks:
       - edu-platform
     restart: unless-stopped
