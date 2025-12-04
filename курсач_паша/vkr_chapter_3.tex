@@ -1,0 +1,44 @@
+\newpage
+\setcounter{subsection}{0}
+\setcounter{equation}{0}
+%\setcounter{section}{0}
+
+\begin{center}
+\section{Глава 3. Реализация системы}
+\end{center}
+
+\subsection{Описание инфраструктуры}
+Docker Compose / Kubernetes, CI/CD, автоматизация деплоя
+
+\begin{figure}[ht!] %[h!]
+\begin{center}
+\includegraphics[scale=0.5]{fig_template}
+\end{center}
+\label{fig1}
+\caption{Пример анализа данных}
+\end{figure}
+
+Таким образом, на основе предложенных систем, включая информационно-аналитические 
+(если рассматривать управление данными), рассматриваются системы анализа 
+данных (анализа, управления, автоматизации, процессов, систем и т.д.), 
+включая, например, системы управления, а также информационные системы.
+
+\subsection{Backend}
+
+Модули (user, course, lab, environment, notification).
+
+API (REST/gRPC).
+\subsection{LMS-интеграция}
+(привязка к курсам, отслеживание прогресса).
+
+\subsection{Telegram Bot}
+
+Авторизация через Telegram OAuth.
+
+Уведомления (запуск окружения, завершение, ошибки).
+
+Управление окружением (запуск/остановка через чат).
+
+\subsection{Frontend: интерфейс LMS для запуска лабораторных окружений}
+
+\subsection{Примеры сценариев работы (регистрация, запуск лабораторной, проверка результата)}

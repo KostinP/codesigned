@@ -1,0 +1,53 @@
+%%% Поля и размеры страницы %%%
+\usepackage{lscape} % Для альбомной ориентации страниц
+\usepackage{geometry} % Для конфигурации размеров полей
+
+%%% Математические пакеты %%%
+\usepackage{braket,amssymb,amsmath,array,commath,mathtext,wrapfig,tikz}
+\usepackage[arrows=pgf-filled,version=3]{mhchem}
+\usepackage{bm} % bold math
+
+%%% Форматирование текста %%%
+\usepackage{indentfirst} % Отступ абзаца
+\usepackage{setspace} % Пакет для регулировки межстрочного интервала
+\onehalfspacing % Полуторный интервал для всего текста
+%см. далее
+
+%%% Работа с графикой %%%
+\usepackage{epsfig,mathtext} % Для работы с графикой и текстом
+\usepackage[T2A]{fontenc} % Кодировка шрифта
+% \IfFileExists{pscyr.sty}{\usepackage{pscyr}}{} % Подключение шрифта Times New Roman, если установлен пакет PSCyr
+%
+% https://github.com/AndreyAkinshin/Russian-Phd-LaTeX-Dissertation-Template/tree/master/PSCyr
+%
+%\usepackage{pscyr} % Подключение шрифта Times New Roman
+%\usepackage{TM}
+\usepackage[utf8]{inputenc}  % Кодировка входного текста UTF-8
+\usepackage[english,russian]{babel} % Языки: английский, русский
+
+%%% Цвет %%%
+\usepackage{xcolor}  %\textcolor{red}{цветной текст}
+
+%%% Пагинация страниц %%%
+\usepackage{afterpage} %% Подключение страниц для работы с разворотами
+\usepackage{totcount}  % Подсчёт общего количества страниц и т.д.
+\usepackage[singlelinecheck=off]{caption}	% Конфигурация подписей
+\usepackage{soul}	% Поддержка зачёркивания и выделения текста \sout{}.
+\usepackage{ulem}
+
+%%% Библиография %%%
+\usepackage{cite} % Поддержка ссылок на литературу
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+
+%%% Графика %%%
+\usepackage{graphicx} %
+\usepackage{subfigure} % Поддержка нескольких изображений для одной подписи!!
+
+%%% Таблицы %%%
+\usepackage{dcolumn} % Выравнивание десятичных чисел по разделителю.
+\usepackage{changebar}
+\usepackage{longtable} % Длинные таблицы.
+\usepackage{hhline} % Горизонтальные линии для таблиц (\hhline{|=|~~|-|}).
+\usepackage{multirow,makecell,array} % Поддержка многострочных таблиц.
+
+\usepackage{float}
